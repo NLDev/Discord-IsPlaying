@@ -22,6 +22,8 @@ let appname = config.getName();
 
 const debug = true;
 
+global.debug = debug;
+
 if (debug){
     require("electron-context-menu")({
         prepend: (params, browserWindow) => [{
@@ -39,7 +41,7 @@ let getLogoPath = function(){
 
 let createWindowConfig = function(){
     var conf = { 
-        resizable: false, 
+        resizable: debug, 
         width:     300, 
         heigth:    100, 
         icon:      getLogoPath(), 
