@@ -1,4 +1,4 @@
-@import url('/lib/OpenSans-Regular.ttf');
+@import url('./lib/OpenSans-Regular.ttf');
 
 *, body { font-family:   'Open Sans', sans-serif; }
 
@@ -18,6 +18,10 @@ h1 { font-size:          22px; }
     left:                50%;
     -webkit-transform:   translateX(-50%);
     transform:           translateX(-50%);
+}
+
+.dip--help--fix {
+    width:               90% !important;
 }
 
 .dip--bottom {
