@@ -6,60 +6,71 @@
 //----------------------------//
 ////////////////////////////////
 
-let fs = require("fs");
+let { app, BrowserWindow } = require("electron");
+let path                   = require("path");
+let { shell }              = require("electron");
+let ipc                    = require("electron").ipcMain;
+let os                     = require("os");
 
-let Discord = require("discord.js");
-let pj      = require("./package.json");
+global.appRoot = path.resolve(__dirname);
 
-require.extensions['.json'] = function (module, filename) { module.exports = fs.readFileSync(filename, "utf8"); };
-var jsondata = require('./config.json');
-var raw      = JSON.parse(jsondata);
+let log    = require(__dirname + "/utils/logger");
+let config = require(__dirname + "/utils/configurator");
 
-var token = raw.bot.token;
+let version = config.getVersion();
+let appname = config.getName();
 
-let log = function(txt, err){
-    const date = new Date();
-    let hour = date.getHours(),
-        min  = date.getMinutes(),
-        sec  = date.getSeconds();
+const debug = true;
 
-    hour  = (hour < 10 ? "0" : "") + hour;
-    min   = (min  < 10 ? "0" : "") + min;
-    sec   = (sec  < 10 ? "0" : "") + sec;
+if (debug){
+    require("electron-context-menu")({
+        prepend: (params, browserWindow) => [{
+            label: "Rainbow",
+            visible: params.mediaType === "image"
+        }]
+    });
+}
 
-    let head = (err ? "[ERROR]" : "[INFO] ");
+let getLogoPath = function(){
+    if (os.platform() === "darwin")     return __dirname + "/assets/icon/icon.icns";
+    else if (os.platform() === "win32") return __dirname + "/assets/icon/icon.ico";
+    else                                return __dirname + "/assets/icon/icon.png";
+}
 
-    console.log(head + " [" + hour + ":" + min + ":" + sec + "] - " + txt);
-};
-
-let isset = function(obj){ return !!(obj && obj !== null && (typeof obj === "string" && obj !== "")); }
+let createWindowConfig = function(){
+    var conf = { 
+        resizable: false, 
+        width:     300, 
+        heigth:    100, 
+        icon:      getLogoPath(), 
+        show:      false 
+    };
+    return conf;
+}
 
 console.log(
     "\n" +
-    " ###############################\n" +
-    " #- - - - - - - - - - - - - - -#\n" +
-    " # Starting PLAYINGBot: v" + pj.version + " #\n" +
-    " #- - - - - - - - - - - - - - -#\n" +
-    " ###############################\n" +
-    "\n" +
+    " #" + "-".repeat(17 + appname.length) + "#\n" +
+    " # Started " + appname + " v" + version + " #\n" +
+    " #" + "-".repeat(17 + appname.length) + "#\n\n" +
     "Copyright (c) " + (new Date()).getFullYear() + " NullDev\n"
 );
 
-log("Logging in...");
+let win;
 
-if (!isset(token)){
-    log("No Token Provided. Exiting...", true);
-    process.exit(1);
-}
+ipc.on("UI-windowID", function (event) { event.returnValue = win.id; });
 
-var client = new class Client extends Discord.Client {
-    constructor() {
-        super({ fetchAllMembers: true });
-        this.on("ready", () => { 
-            log(`Logged in as ${client.user.tag}`);
-            this.user.setActivity("testing my selfbot...");
-            log("Started."); 
-        });
-        this.login(token);
-    }
-};
+app.setName(appname);
+
+app.on("ready", () => {
+    log("Started.");
+    log("OS is: " + os.platform());
+    log("Debug mode is " + (debug ? "en" : "dis") + "abled.");
+
+    win = new BrowserWindow(createWindowConfig());
+    win.setMenu(null); 
+    win.loadURL(`file://${__dirname}/views/app.html`);
+    win.on("ready-to-show", () => { win.show(); });
+    win.on("closed",        () => { app.quit(); });
+    win.center();
+});
