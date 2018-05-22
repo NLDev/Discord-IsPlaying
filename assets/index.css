@@ -22,6 +22,7 @@ h1 { font-size:          22px; }
 
 .dip--help--fix {
     width:               90% !important;
+    top:                 5%  !important;
 }
 
 .dip--bottom {
