@@ -7,6 +7,7 @@
 ////////////////////////////////
 
 let { app, BrowserWindow } = require("electron");
+let electron               = require("electron");
 let path                   = require("path");
 let { shell }              = require("electron");
 let ipc                    = require("electron").ipcMain;
@@ -40,12 +41,21 @@ let getLogoPath = function(){
 }
 
 let createWindowConfig = function(){
-    var conf = { 
+    let wHeight = 100;
+    let wWidth  = 300;
+
+    let bounds = electron.screen.getPrimaryDisplay().bounds;
+    let x = Math.ceil(bounds.x + ((bounds.width  - wWidth)  / 2));
+    let y = Math.ceil(bounds.y + ((bounds.height - wHeight) / 2));
+
+    let conf = { 
         resizable: debug, 
-        width:     300, 
-        heigth:    100, 
+        width:     wWidth, 
+        heigth:    wHeight, 
+        x:         x, 
+        y:         y,
         icon:      getLogoPath(), 
-        show:      false 
+        show:      false
     };
     return conf;
 }
@@ -74,5 +84,4 @@ app.on("ready", () => {
     win.loadURL(`file://${__dirname}/views/app.html`);
     win.on("ready-to-show", () => { win.show(); });
     win.on("closed",        () => { app.quit(); });
-    win.center();
 });
