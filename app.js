@@ -6,12 +6,13 @@
 //----------------------------//
 ////////////////////////////////
 
-let { app, BrowserWindow } = require("electron");
-let electron               = require("electron");
-let path                   = require("path");
-let { shell }              = require("electron");
-let ipc                    = require("electron").ipcMain;
-let os                     = require("os");
+let { app, BrowserWindow, Tray, Menu } = require("electron");
+
+let electron  = require("electron");
+let path      = require("path");
+let { shell } = require("electron");
+let ipc       = require("electron").ipcMain;
+let os        = require("os");
 
 global.appRoot = path.resolve(__dirname);
 
@@ -41,8 +42,8 @@ let getLogoPath = function(){
 }
 
 let createWindowConfig = function(){
-    let wHeight = 100;
-    let wWidth  = 300;
+    let wHeight = 200;
+    let wWidth  = 450;
 
     let bounds = electron.screen.getPrimaryDisplay().bounds;
     let x = Math.ceil(bounds.x + ((bounds.width  - wWidth)  / 2));
@@ -70,7 +71,7 @@ console.log(
 
 let win;
 
-ipc.on("UI-windowID", function (event) { event.returnValue = win.id; });
+ipc.on("UI-windowID", function(event){ event.returnValue = win.id; });
 
 app.setName(appname);
 
@@ -79,9 +80,34 @@ app.on("ready", () => {
     log("OS is: " + os.platform());
     log("Debug mode is " + (debug ? "en" : "dis") + "abled.");
 
+    let appIcon = new Tray(getLogoPath());
+
+    let contextMenu = Menu.buildFromTemplate([
+        {
+            label: "Show Window", click: function(){ win.show(); } 
+        }, {
+            label: "Exit", click: function(){
+                app.isQuiting = true;
+                app.exit();
+            }
+        }
+    ]);
+
+    appIcon.setContextMenu(contextMenu)
+
     win = new BrowserWindow(createWindowConfig());
     win.setMenu(null); 
     win.loadURL(`file://${__dirname}/views/app.html`);
+
     win.on("ready-to-show", () => { win.show(); });
-    win.on("closed",        () => { app.quit(); });
+    win.on("closed",        () => { app.exit(); });
+    win.on("show",          () => { appIcon.setHighlightMode("always"); });
+    win.on("close", function(event){
+        event.preventDefault();
+        win.hide();
+    });
+    win.on("minimize", function(event){
+        event.preventDefault();
+        win.hide();
+    });
 });
