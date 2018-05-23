@@ -23,6 +23,17 @@ let isset = function(obj){ return !!(obj && obj !== null && (typeof obj === "str
 
 let openUri = function(url){ shell.openExternal(url); };
 
+
+window.onload = () => {
+    let win = remote.getCurrentWindow();
+    //let currentWindow = remote.getCurrentWindow().removeAllListeners();
+    
+    win.setMinimumSize(400, 650);
+    win.setTitle(win.getTitle() + " - Changer");
+
+    //currentWindow.on("", function(){ ... });
+}
+
 $(document).ready(function(){
 
     let injectToken  = store.get("token");
@@ -79,6 +90,16 @@ $(document).ready(function(){
 
             alert("Status updated!");
         });
+    });
+
+    $("#delete").on("click", function(e){
+        store.set("token", "");
+        store.set("status", "");
+
+        $("#token").val("");
+        $("#status").val("");
+
+        alert("Records Deleted!");
     });
 
     $("#login-link").on("click", function(e){ openUri("https://discordapp.com/login"); });
