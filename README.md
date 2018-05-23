@@ -16,4 +16,11 @@ Also, this text is forced. So it doesnt matter what you're actually playing.
 
 ## Showcase
 
-<sub>- include some fancy screenshots here -</sub>
+<p align="center">
+<br>
+<div style="display:flex;">
+<img height="auto" width="300" src="https://raw.githubusercontent.com/NLDev/Discord-IsPlaying/master/.readme/s1.png" />
+<img height="auto" width="300" src="https://raw.githubusercontent.com/NLDev/Discord-IsPlaying/master/.readme/s2.png" />
+</div>
+<br>
+</p>
