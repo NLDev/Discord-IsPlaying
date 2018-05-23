@@ -13,11 +13,12 @@ body {
 h1 { font-size:          22px; }
 
 .dip--center {
-    top: 10%;
+    top:                 2%;
     position:            absolute;
     left:                50%;
     -webkit-transform:   translateX(-50%);
     transform:           translateX(-50%);
+    width:               80%;
 }
 
 .dip--help--fix {
@@ -30,6 +31,11 @@ h1 { font-size:          22px; }
     text-align:          center;
     bottom:              5px;
     position:            absolute;
+}
+
+.dip--note {
+    width:               100%;
+    text-align:          left;
 }
 
 .dip--input--group {
