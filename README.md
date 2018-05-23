@@ -14,6 +14,14 @@ Also, this text is forced. So it doesnt matter what you're actually playing.
 
 <hr>
 
+## Stage
+
+THIS IS IN BETA.
+
+I wouldn't recommend using it yet. 
+
+<hr>
+
 ## Showcase
 
 <p align="center">
