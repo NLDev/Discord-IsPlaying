@@ -42,6 +42,17 @@ $(document).ready(function(){
     if (isset(injectToken))  $("#token").val(injectToken);
     if (isset(injectStatus)) $("#status").val(injectStatus);
 
+    if ($("#status").val().replace(/\s/g, "").length > 0) $("#status-label").hide();
+    if ($("#token").val().replace(/\s/g, "").length > 0)  $("#token-label").hide();
+
+    $("#status").on("keydown keyup keypress paste click", function(){
+        $("#status").val().replace(/\s/g, "").length > 0 ? $("#status-label").hide() : $("#status-label").show();
+    });
+
+    $("#token").on("keydown keyup keypress paste click", function(){
+        $("#token").val().replace(/\s/g, "").length > 0 ? $("#token-label").hide() : $("#token-label").show();
+    });
+
     $("#t-help").on("click", function(e){
         let top = remote.getCurrentWindow();
 
