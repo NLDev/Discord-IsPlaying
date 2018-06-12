@@ -16,11 +16,8 @@ let os        = require("os");
 
 global.appRoot = path.resolve(__dirname);
 
-let log    = require(__dirname + "/utils/logger");
-let config = require(__dirname + "/utils/configurator");
-
-let version = config.getVersion();
-let appname = config.getName();
+let log    = require(appRoot + "/utils/logger");
+let config = require(appRoot + "/utils/configurator");
 
 const debug = true;
 
@@ -36,9 +33,9 @@ if (debug){
 }
 
 let getLogoPath = function(){
-    if (os.platform() === "darwin")     return __dirname + "/assets/icon/icon.icns";
-    else if (os.platform() === "win32") return __dirname + "/assets/icon/icon.ico";
-    else                                return __dirname + "/assets/icon/icon.png";
+    if (os.platform() === "darwin")     return appRoot + "/assets/icon/icon.icns";
+    else if (os.platform() === "win32") return appRoot + "/assets/icon/icon.ico";
+    else                                return appRoot + "/assets/icon/icon.png";
 }
 
 let createWindowConfig = function(){
@@ -61,12 +58,16 @@ let createWindowConfig = function(){
     return conf;
 }
 
+let version = config.getVersion();
+let appname = config.getName();
+let authors = config.getAuthor();
+
 console.log(
     "\n" +
-    " #" + "-".repeat(17 + appname.length) + "#\n" +
+    " #" + "-".repeat(12 + appname.length + version.toString().length) + "#\n" +
     " # Started " + appname + " v" + version + " #\n" +
-    " #" + "-".repeat(17 + appname.length) + "#\n\n" +
-    "Copyright (c) " + (new Date()).getFullYear() + " NullDev\n"
+    " #" + "-".repeat(12 + appname.length + version.toString().length) + "#\n\n" +
+    "Copyright (c) " + (new Date()).getFullYear() + " " + authors + "\n"
 );
 
 let win;
