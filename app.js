@@ -39,7 +39,7 @@ let getLogoPath = function(){
 }
 
 let createWindowConfig = function(){
-    let wHeight = 200;
+    let wHeight = 250;
     let wWidth  = 450;
 
     let bounds = electron.screen.getPrimaryDisplay().bounds;
