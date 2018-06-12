@@ -113,6 +113,17 @@ $(document).ready(function(){
         alert("Records Deleted!");
     });
 
+    $("#minimize").on("click", function(e){
+        let win = remote.getCurrentWindow();
+        win.hide();
+    });
+
+    $("#forceexit").on("click", function(e){
+        let app = electron;
+        //app.isQuiting = true;
+        //app.exit();
+    });
+
     $("#login-link").on("click", function(e){ openUri("https://discordapp.com/login"); });
 
     $("#help-credit").on("click", function(e){ openUri("https://github.com/TheRacingLion/Discord-SelfBot/wiki/Discord-Token-Tutorial"); });
