@@ -79,6 +79,22 @@ h1 { font-size:          22px; }
 .dip--input--group input:focus + label,
 .dip--input--group input.active + label { transform: translateY(-30px); }
 
+.dip--btn--row {
+    display:             flex;
+}
+
+.dip--btn--row a {
+    width:               40%;
+}
+
+.dip--btn--row .dip--spacing {
+    width:               10%;
+}
+
+.secondoverride {
+    margin-top:          -25px;
+}
+
 .dip--sub--btn {
     -webkit-transition:  all 200ms cubic-bezier(.39, .50, .15, 1.36);
     transition:          all 200ms cubic-bezier(.39, .50, .15, 1.36);
@@ -98,13 +114,24 @@ h1 { font-size:          22px; }
     box-shadow:          #000 0 0 0 40px inset;
 }
 
+.redoverride {
+    margin-top:          30px auto;
+    color:               #F00;
+    box-shadow:          #F00 0 0 0 2px inset;
+}
+
+.redoverride:hover {
+    color:               #FFF;
+    box-shadow:          #F00 0 0 0 40px inset;
+}
+
 .dip--help {
     padding-top:         15px;
     font-size:           12px;
 }
 
 .dip--status { 
-    margin-top:          40px;
+    margin-top:          30px;
     font-size:           16px;
     font-weight:         bold;
 }
