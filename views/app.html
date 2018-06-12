@@ -22,12 +22,19 @@
                     <label for="status" id="status-label">New Status</label>
                 </div>
                 <center>
-                    <a href="#" id="submit" class="dip--sub--btn">Update</a>
-                    <a href="#" id="delete" class="dip--sub--btn">Delete saved data</a>
+                    <div class="dip--btn--row">
+                        <a href="#" id="submit"    class="dip--sub--btn">Update</a>
+                        <div class="dip--spacing"></div>
+                        <a href="#" id="delete"    class="dip--sub--btn">Delete saved data</a>
+                    </div>
+                    <div class="dip--btn--row secondoverride">
+                        <a href="#" id="minimize"  class="dip--sub--btn">Minimize to tray</a>
+                        <div class="dip--spacing"></div>
+                        <a href="#" id="forceexit" class="dip--sub--btn redoverride">Completely exit application</a>
+                    </div>
 
                     <p class="dip--note">
-                        Note: If you close or minimize this window, it gets added to your system tray and will run in the background.<br>
-                        To completely close it, rightclick the icon in the system tray and click "Exit".
+                        Note: If you close or minimize this window, it gets added to your system tray and will run in the background.
                     </p>
 
                     <a href="#" id="t-help" class="dip--help">How do I get an account-token?</a>
