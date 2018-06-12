@@ -77,7 +77,7 @@ h1 { font-size:          22px; }
 .dip--input--group input:focus + label { color: #000; }
 
 .dip--input--group input:focus + label,
-.dip--input--group input:active + label { transform: translateY(-30px); }
+.dip--input--group input.active + label { transform: translateY(-30px); }
 
 .dip--sub--btn {
     -webkit-transition:  all 200ms cubic-bezier(.39, .50, .15, 1.36);
