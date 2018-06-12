@@ -19,7 +19,10 @@ let getVersion = function(){ return pInfo.version; };
 
 let getName = function(){ return "Discord IsPlaying"; /*pInfo.name*/; };
 
+let getAuthor = function(){ return pInfo.author; };
+
 module.exports = {
     getVersion: getVersion,
-    getName: getName
+    getName: getName,
+    getAuthor: getAuthor
 };
