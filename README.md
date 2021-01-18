@@ -27,8 +27,8 @@ I wouldn't recommend using it yet.
 <p align="center">
 <br>
 <div style="display:flex;">
-<img height="auto" width="40%" src="https://raw.githubusercontent.com/NLDev/Discord-IsPlaying/master/.readme/s1.png" />
-<img height="auto" width="40%" src="https://raw.githubusercontent.com/NLDev/Discord-IsPlaying/master/.readme/s2.png" />
+<img height="auto" width="40%" src="https://raw.githubusercontent.com/NullDev/Discord-IsPlaying/master/.readme/s1.png" />
+<img height="auto" width="40%" src="https://raw.githubusercontent.com/NullDev/Discord-IsPlaying/master/.readme/s2.png" />
 </div>
 <br>
 </p>
